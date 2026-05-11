@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tobias Lutz — Portfolio</title>
+    <style>
+        :root {
+            --bg: #070812;
+            --bg2: #101124;
+            --surface: rgba(255, 255, 255, .065);
+            --surface-strong: rgba(255, 255, 255, .095);
+            --text: #f7f4ff;
+            --muted: #a9a2bd;
+            --line: rgba(255, 255, 255, .13);
+            --line-strong: rgba(255, 255, 255, .22);
+            --purple: #8b5cf6;
+            --blue: #5ea1ff;
+            --pink: #e879f9;
+            --green: #7ee787;
+            --orange: #ffb86b;
+            --shadow: 0 26px 90px rgba(0, 0, 0, .38);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            color: var(--text);
+            background:
+                radial-gradient(circle at 20% 8%, rgba(139, 92, 246, .22), transparent 30%),
+                radial-gradient(circle at 88% 20%, rgba(94, 161, 255, .16), transparent 28%),
+                linear-gradient(180deg, #070812 0%, #101124 55%, #070812 100%);
+            min-height: 100vh;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            opacity: .10;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 220 220' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.42'/%3E%3C/svg%3E");
+            mix-blend-mode: screen;
+            z-index: 30;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background:
+                linear-gradient(rgba(255, 255, 255, .016) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, .016) 1px, transparent 1px);
+            background-size: 42px 42px;
+            mask-image: linear-gradient(to bottom, black, transparent 78%);
+            z-index: 0;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+        }
+
+        .wrap {
+            width: min(1180px, calc(100% - 36px));
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            border-bottom: 1px solid rgba(255, 255, 255, .09);
+            background: rgba(7, 8, 18, .68);
+            backdrop-filter: blur(18px);
+        }
+
+        .nav {
+            min-height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+        }
+
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 800;
+            letter-spacing: -.035em;
+        }
+
+        .brand-mark {
+            width: 34px;
+            height: 34px;
+            display: grid;
+            place-items: center;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--purple), var(--blue));
+            box-shadow: 0 14px 34px rgba(139, 92, 246, .22);
+            font-size: 12px;
+            font-weight: 900;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 5px;
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, .055);
+        }
+
+        .nav-links a {
+            padding: 8px 13px;
+            border-radius: 999px;
+            color: var(--muted);
+            font-size: 14px;
+            font-weight: 650;
+        }
+
+        .nav-links a:hover {
+            color: var(--text);
+            background: rgba(255, 255, 255, .08);
+        }
+
+        .hero {
+            padding: 92px 0 72px;
+            border-bottom: 1px solid rgba(255, 255, 255, .09);
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 360px;
+            gap: 36px;
+            align-items: center;
+        }
+
+        .kicker {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 0 0 22px;
+            color: var(--muted);
+            font-size: 14px;
+            font-weight: 650;
+            letter-spacing: .02em;
+        }
+
+        h1 {
+            margin: 0;
+            max-width: 830px;
+            font-size: clamp(52px, 8.8vw, 112px);
+            line-height: .88;
+            letter-spacing: -.055em;
+            font-weight: 920;
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, #fff, #b7caff 42%, #e9b2ff 84%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .lead {
+            max-width: 720px;
+            margin: 26px 0 0;
+            color: #c5bfd3;
+            font-size: clamp(18px, 2vw, 23px);
+            line-height: 1.5;
+            letter-spacing: -.02em;
+        }
+
+        .quick-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 32px;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            min-height: 43px;
+            padding: 10px 15px;
+            border-radius: 14px;
+            border: 1px solid var(--line);
+            background: rgba(255, 255, 255, .075);
+            color: var(--text);
+            font-size: 14px;
+            font-weight: 750;
+            transition: .18s ease;
+        }
+
+        .button.primary {
+            border-color: transparent;
+            background: linear-gradient(135deg, var(--blue), var(--purple));
+            box-shadow: 0 18px 46px rgba(94, 161, 255, .18);
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, .12);
+            border-color: var(--line-strong);
+        }
+
+        .hero-panel {
+            border: 1px solid var(--line);
+            border-radius: 34px;
+            padding: 16px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, .105), rgba(255, 255, 255, .052));
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .panel-screen {
+            min-height: 500px;
+            border-radius: 25px;
+            border: 1px solid rgba(255, 255, 255, .10);
+            background:
+                radial-gradient(circle at 30% 15%, rgba(139, 92, 246, .24), transparent 30%),
+                radial-gradient(circle at 80% 25%, rgba(94, 161, 255, .16), transparent 34%),
+                #101225;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .panel-top {
+            display: flex;
+            justify-content: space-between;
+            color: rgba(255, 255, 255, .56);
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .mini-stack {
+            display: grid;
+            gap: 12px;
+            margin-top: 34px;
+        }
+
+        .mini-card {
+            border: 1px solid rgba(255, 255, 255, .10);
+            border-radius: 20px;
+            padding: 15px;
+            background: rgba(255, 255, 255, .07);
+        }
+
+        .mini-card strong {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 16px;
+        }
+
+        .mini-card span {
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.4;
+        }
+
+        .panel-bottom {
+            color: rgba(255, 255, 255, .68);
+            font-size: 14px;
+            line-height: 1.45;
+        }
+
+        .section {
+            padding: 74px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, .09);
+        }
+
+        .section-head {
+            max-width: 880px;
+            margin-bottom: 34px;
+        }
+
+        .section-label {
+            color: var(--muted);
+            font-size: 13px;
+            letter-spacing: .16em;
+            text-transform: uppercase;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            margin: 0;
+            max-width: 820px;
+            font-size: clamp(34px, 5.7vw, 76px);
+            line-height: .98;
+            letter-spacing: -.032em;
+            font-weight: 900;
+        }
+
+        .about-copy {
+            margin: 0;
+            max-width: 960px;
+            color: #ede7fb;
+            font-size: clamp(24px, 3.5vw, 48px);
+            line-height: 1.08;
+            letter-spacing: -.032em;
+            font-weight: 780;
+        }
+
+        .about-copy span {
+            color: rgba(237, 231, 251, .43);
+        }
+
+        .github-layout {
+            display: grid;
+            grid-template-columns: 285px 1fr;
+            gap: 22px;
+            align-items: start;
+        }
+
+        .profile-card,
+        .repo-toolbar,
+        .repo-card,
+        .stack-card,
+        .timeline-item,
+        .contact-box {
+            border: 1px solid var(--line);
+            background: rgba(255, 255, 255, .07);
+            backdrop-filter: blur(16px);
+            box-shadow: 0 1px 0 rgba(255, 255, 255, .04), 0 24px 70px rgba(0, 0, 0, .20);
+        }
+
+        .profile-card {
+            position: sticky;
+            top: 92px;
+            border-radius: 24px;
+            overflow: hidden;
+        }
+
+        .profile-image {
+            aspect-ratio: 1 / 1;
+            border-bottom: 1px solid var(--line);
+            background:
+                linear-gradient(135deg, rgba(94, 161, 255, .26), rgba(139, 92, 246, .24)),
+                #14162c;
+            display: grid;
+            place-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .profile-image::before {
+            content: "";
+            position: absolute;
+            width: 210px;
+            height: 210px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, .11);
+            transform: translate(32px, 40px);
+        }
+
+        .profile-image span {
+            position: relative;
+            font-size: 76px;
+            font-weight: 950;
+            letter-spacing: -.13em;
+        }
+
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 40%;
+        }
+
+        .profile-body {
+            padding: 18px;
+        }
+
+        .profile-body h3 {
+            margin: 0;
+            font-size: 25px;
+            letter-spacing: -.04em;
+        }
+
+        .username {
+            margin: 4px 0 14px;
+            color: var(--muted);
+            font-size: 15px;
+        }
+
+        .profile-body p {
+            margin: 0;
+            color: #c5bfd3;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .profile-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 9px;
+            margin-top: 16px;
+        }
+
+        .stat {
+            border: 1px solid rgba(255, 255, 255, .10);
+            border-radius: 14px;
+            padding: 11px;
+            background: rgba(255, 255, 255, .055);
+        }
+
+        .stat strong {
+            display: block;
+            font-size: 19px;
+        }
+
+        .stat span {
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .repo-area {
+            display: grid;
+            gap: 14px;
+        }
+
+        .repo-toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 14px;
+            border-radius: 18px;
+            padding: 12px;
+        }
+
+        .repo-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+        }
+
+        .repo-tab {
+            padding: 8px 12px;
+            border-radius: 12px;
+            color: var(--muted);
+            font-size: 14px;
+            font-weight: 700;
+            border: 0;
+            cursor: pointer;
+            font-family: inherit;
+            background: transparent;
+        }
+
+        .repo-tab.active {
+            color: var(--text);
+            background: rgba(139, 92, 246, .18);
+            box-shadow: inset 0 -2px 0 var(--purple);
+        }
+
+        .repo-count {
+            color: var(--muted);
+            font-size: 13px;
+            white-space: nowrap;
+        }
+
+        .repo-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .repo-card {
+            border-radius: 22px;
+            overflow: hidden;
+            transition: .18s ease;
+        }
+
+        .repo-card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(255, 255, 255, .25);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, .28);
+        }
+
+        .repo-card.is-hidden {
+            display: none;
+        }
+
+        .project-media {
+            aspect-ratio: 16 / 9;
+            border-bottom: 1px solid rgba(255, 255, 255, .10);
+            background:
+                linear-gradient(135deg, rgba(94, 161, 255, .18), rgba(139, 92, 246, .20)),
+                repeating-linear-gradient(135deg, rgba(255, 255, 255, .06) 0 1px, transparent 1px 12px),
+                #111327;
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
+        }
+
+        .project-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .project-media::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            pointer-events: none;
+            backdrop-filter: blur(1.8px);
+            background:
+                linear-gradient(180deg, rgba(7, 8, 18, .08), rgba(7, 8, 18, .34)),
+                radial-gradient(circle at 20% 10%, rgba(139, 92, 246, .22), transparent 35%);
+        }
+
+        .project-media img {
+            filter: saturate(1.08) contrast(1.04);
+            transform: scale(1.015);
+        }
+
+        .project-media.placeholder::after {
+            content: attr(data-label);
+            position: absolute;
+            z-index: 2;
+            left: 14px;
+            bottom: 13px;
+            padding: 6px 9px;
+            border-radius: 999px;
+            color: rgba(255, 255, 255, .70);
+            background: rgba(7, 8, 18, .44);
+            border: 1px solid rgba(255, 255, 255, .10);
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: .06em;
+            text-transform: uppercase;
+        }
+
+        .repo-content {
+            padding: 16px;
+        }
+
+        .repo-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 9px;
+        }
+
+        .repo-name {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 0;
+            color: #9ec8ff;
+            font-size: 18px;
+            font-weight: 800;
+            letter-spacing: -.025em;
+        }
+
+        .repo-name svg {
+            flex: 0 0 auto;
+            color: var(--muted);
+        }
+
+        .repo-name span {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .visibility {
+            flex: 0 0 auto;
+            border: 1px solid rgba(255, 255, 255, .14);
+            border-radius: 999px;
+            padding: 3px 8px;
+            color: var(--muted);
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        .repo-description {
+            min-height: 64px;
+            margin: 0 0 16px;
+            color: #c5bfd3;
+            font-size: 14px;
+            line-height: 1.48;
+        }
+
+        .repo-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .repo-lang {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .lang-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--blue);
+        }
+
+        .lang-dot.green {
+            background: var(--green);
+        }
+
+        .lang-dot.purple {
+            background: var(--purple);
+        }
+
+        .lang-dot.orange {
+            background: var(--orange);
+        }
+
+        .repo-links {
+            display: inline-flex;
+            gap: 10px;
+        }
+
+        .repo-links a:hover {
+            color: var(--text);
+        }
+
+        .stack-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .stack-card {
+            min-height: 185px;
+            border-radius: 22px;
+            padding: 20px;
+        }
+
+        .stack-card h3 {
+            margin: 0 0 11px;
+            font-size: 22px;
+            letter-spacing: -.035em;
+        }
+
+        .stack-card p {
+            margin: 0;
+            color: #c5bfd3;
+            font-size: 14px;
+            line-height: 1.55;
+        }
+
+        .timeline {
+            display: grid;
+            gap: 12px;
+            border-left: 1px solid rgba(255, 255, 255, .18);
+            padding-left: 22px;
+            margin-left: 7px;
+        }
+
+        .timeline-item {
+            position: relative;
+            border-radius: 20px;
+            padding: 18px;
+        }
+
+        .timeline-item::before {
+            content: "";
+            position: absolute;
+            left: -28px;
+            top: 22px;
+            width: 11px;
+            height: 11px;
+            border-radius: 50%;
+            background: var(--purple);
+            box-shadow: 0 0 14px rgba(139, 92, 246, .45);
+        }
+
+        .timeline-item small {
+            display: block;
+            margin-bottom: 7px;
+            color: var(--muted);
+            font-weight: 800;
+        }
+
+        .timeline-item h3 {
+            margin: 0 0 7px;
+            font-size: 20px;
+            letter-spacing: -.03em;
+        }
+
+        .timeline-item p {
+            margin: 0;
+            color: #c5bfd3;
+            line-height: 1.5;
+        }
+
+        .contact-box {
+            border-radius: 28px;
+            padding: 28px;
+            background:
+                radial-gradient(circle at 84% 10%, rgba(139, 92, 246, .18), transparent 32%),
+                rgba(255, 255, 255, .065);
+        }
+
+        .contact-box h2 {
+            margin: 0;
+            font-size: clamp(42px, 7vw, 92px);
+            line-height: .9;
+            letter-spacing: -.075em;
+        }
+
+        .contact-box p {
+            max-width: 660px;
+            margin: 18px 0 0;
+            color: #c5bfd3;
+            font-size: 17px;
+            line-height: 1.55;
+        }
+
+        footer {
+            padding: 28px 0 48px;
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        @media (max-width: 940px) {
+
+            .hero-grid,
+            .github-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-panel {
+                max-width: 420px;
+            }
+
+            .panel-screen {
+                min-height: 420px;
+            }
+
+            .profile-card {
+                position: static;
+            }
+
+            .profile-image {
+                aspect-ratio: 16 / 7;
+            }
+
+            .repo-grid,
+            .stack-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .wrap {
+                width: min(100% - 24px, 1180px);
+            }
+
+            .nav {
+                min-height: 62px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                padding: 56px 0 48px;
+            }
+
+            h1 {
+                font-size: clamp(48px, 17vw, 86px);
+            }
+
+            .repo-toolbar {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .repo-description {
+                min-height: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="wrap nav">
+            <a class="brand" href="#top" aria-label="Zur Startseite">
+                <span class="brand-mark">TL</span>
+                <span>Tobias Lutz</span>
+            </a>
+
+            <nav class="nav-links" aria-label="Navigation">
+                <a href="#about">About</a>
+                <a href="#projects">Projects</a>
+                <a href="#stack">Stack</a>
+                <a href="#contact">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main id="top">
+        <section class="hero">
+            <div class="wrap hero-grid">
+                <div>
+                    <p class="kicker">Softwareentwicklung · Web & Mobile Apps · SAP 2026</p>
+                    <h1>Software, Apps und <span class="gradient-text">digitale Produkte</span>.</h1>
+                    <p class="lead">
+                        Ich bin Tobias Lutz, Informatik-Schüler aus Baden-Württemberg und ab 2026 dualer Student bei
+                        SAP.
+                        Mein Fokus liegt auf mobilen Anwendungen, Backend-Systemen und klar gestalteten
+                        Nutzeroberflächen.
+                    </p>
+
+                    <div class="quick-links">
+                        <a class="button primary" href="#projects">Projekte ansehen</a>
+                        <a class="button" href="#contact">Kontakt</a>
+                        <a class="button" href="https://github.com/" target="_blank" rel="noreferrer">GitHub</a>
+                    </div>
+                </div>
+
+                <aside class="hero-panel" aria-label="Projektvorschau">
+                    <div class="panel-screen">
+                        <div>
+                            <div class="panel-top">
+                                <span>Portfolio</span>
+                                <span>2026</span>
+                            </div>
+
+                            <div class="mini-stack">
+                                <div class="mini-card">
+                                    <strong>nearby.</strong>
+                                    <span>Mobile Event- und Ticket-App mit Standortfunktionen und eigenem
+                                        Backend.</span>
+                                </div>
+                                <div class="mini-card">
+                                    <strong>CarPlay Shell</strong>
+                                    <span>React-Native-Prototyp mit Navigation, Mediensteuerung und modularer
+                                        Oberfläche.</span>
+                                </div>
+                                <div class="mini-card">
+                                    <strong>OpenClaw Lab</strong>
+                                    <span>Server- und AI-Experimente mit Docker, Ollama und eigener
+                                        Infrastruktur.</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel-bottom">
+                            Konzipieren, entwickeln, testen und iterativ verbessern.
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </section>
+
+        <section class="section" id="about">
+            <div class="wrap">
+                <div class="section-head">
+                    <div class="section-label">About</div>
+                    <h2 class="section-title">Technik mit Struktur und Anspruch</h2>
+                </div>
+
+                <p class="about-copy">
+                    Ich entwickle Anwendungen, die technisch sauber umgesetzt sind und gleichzeitig hochwertig wirken.
+                    <span>Besonders interessieren mich Web & Mobile Development, API-Design, Datenbanken, Infrastruktur
+                        und
+                        durchdachte User Interfaces.</span>
+                </p>
+            </div>
+        </section>
+
+        <section class="section" id="projects">
+            <div class="wrap">
+                <div class="section-head">
+                    <div class="section-label">Projects</div>
+                    <h2 class="section-title">Ausgewählte Projekte</h2>
+                </div>
+
+                <div class="github-layout">
+                    <aside class="profile-card">
+                        <div class="profile-image">
+                            <img src="assets/profile.png" alt="Profilbild von Tobias Lutz" />
+                        </div>
+                        <div class="profile-body">
+                            <h3>Tobias Lutz</h3>
+                            <div class="username">@to-lutz</div>
+                            <p>
+                                Fokus auf webbasierte und mobile Anwendungen, Backends, UI-Prototypen und selbst
+                                betriebene
+                                Infrastruktur.
+                            </p>
+
+                            <div class="profile-stats">
+                                <div class="stat">
+                                    <strong>5+</strong>
+                                    <span>Projekte</span>
+                                </div>
+                                <div class="stat">
+                                    <strong>2026</strong>
+                                    <span>SAP</span>
+                                </div>
+                            </div>
+                        </div>
+                    </aside>
+
+                    <div class="repo-area">
+                        <div class="repo-toolbar">
+                            <div class="repo-tabs" aria-label="Projektfilter">
+                                <button class="repo-tab active" type="button" data-filter="all">Pinned</button>
+                                <button class="repo-tab" type="button" data-filter="mobile">Mobile</button>
+                                <button class="repo-tab" type="button" data-filter="backend">Backend</button>
+                            </div>
+                            <div class="repo-count">5 Projekte</div>
+                        </div>
+
+                        <div class="repo-grid">
+                            <article class="repo-card" data-category="mobile backend">
+                                <div class="project-media placeholder" data-label="nearby.">
+                                    <img src="assets/nearby.png" alt="Screenshot von nearby." />
+                                </div>
+                                <div class="repo-content">
+                                    <div class="repo-top">
+                                        <a class="repo-name" href="#">
+                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"
+                                                aria-hidden="true">
+                                                <path
+                                                    d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75H4.5A1.5 1.5 0 0 0 3 15.5a.5.5 0 0 1-1 0v-13Zm1.5 10.51A2.99 2.99 0 0 1 4.5 13h8V1.5h-8A1 1 0 0 0 3.5 2.5v10.51Z" />
+                                            </svg>
+                                            <span>nearby</span>
+                                        </a>
+                                        <span class="visibility">Private</span>
+                                    </div>
+                                    <p class="repo-description">
+                                        Event- und Ticket-App mit Standortfunktionen, QR-Tickets, Authentifizierung und
+                                        MySQL-Backend.
+                                    </p>
+                                    <div class="repo-footer">
+                                        <span class="repo-lang"><span class="lang-dot"></span>TypeScript</span>
+                                        <span class="repo-links"><a target="_blank" rel="noopener noreferrer"
+                                                href="https://nearby.losagora.net">Details</a></span>
+                                    </div>
+                                </div>
+                            </article>
+
+                            <article class="repo-card" data-category="mobile">
+                                <div class="project-media placeholder" data-label="CarPlay UI">
+                                    <img src="assets/carplay.png" alt="CarPlay UI" />
+                                </div>
+                                <div class="repo-content">
+                                    <div class="repo-top">
+                                        <a class="repo-name" href="#">
+                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"
+                                                aria-hidden="true">
+                                                <path
+                                                    d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75H4.5A1.5 1.5 0 0 0 3 15.5a.5.5 0 0 1-1 0v-13Zm1.5 10.51A2.99 2.99 0 0 1 4.5 13h8V1.5h-8A1 1 0 0 0 3.5 2.5v10.51Z" />
+                                            </svg>
+                                            <span>carplay-shell</span>
+                                        </a>
+                                        <span class="visibility">Prototype</span>
+                                    </div>
+                                    <p class="repo-description">
+                                        React-Native-Prototyp einer CarPlay-ähnlichen Oberfläche mit Navigation,
+                                        Mediensteuerung und Telefonansicht.
+                                    </p>
+                                    <div class="repo-footer">
+                                        <span class="repo-lang"><span class="lang-dot"></span>TypeScript</span>
+                                        <span class="repo-links"></span>
+                                    </div>
+                                </div>
+                            </article>
+
+                            <article class="repo-card" data-category="backend">
+                                <div class="project-media placeholder" data-label="server dashboard">
+                                    <img src="assets/openclaw.png" alt="OpenClaw Server Setup" />
+                                </div>
+                                <div class="repo-content">
+                                    <div class="repo-top">
+                                        <a class="repo-name" href="#">
+                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"
+                                                aria-hidden="true">
+                                                <path
+                                                    d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75H4.5A1.5 1.5 0 0 0 3 15.5a.5.5 0 0 1-1 0v-13Zm1.5 10.51A2.99 2.99 0 0 1 4.5 13h8V1.5h-8A1 1 0 0 0 3.5 2.5v10.51Z" />
+                                            </svg>
+                                            <span>openclaw-lab</span>
+                                        </a>
+                                        <span class="visibility">Lab</span>
+                                    </div>
+                                    <p class="repo-description">
+                                        Selbst betriebenes AI- und Automation-Setup auf einem Ubuntu-VPS mit Docker,
+                                        Ollama und Gateway-Konfiguration.
+                                    </p>
+                                    <div class="repo-footer">
+                                        <span class="repo-lang"><span class="lang-dot green"></span>Shell</span>
+                                        <span class="repo-links"></span>
+                                    </div>
+                                </div>
+                            </article>
+
+                            <article class="repo-card" data-category="backend">
+                                <div class="project-media placeholder" data-label="plugin code">
+                                    <img src="assets/spigot.jpg" alt="Spigot Plugin Code" />
+                                </div>
+                                <div class="repo-content">
+                                    <div class="repo-top">
+                                        <a class="repo-name" href="#">
+                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"
+                                                aria-hidden="true">
+                                                <path
+                                                    d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75H4.5A1.5 1.5 0 0 0 3 15.5a.5.5 0 0 1-1 0v-13Zm1.5 10.51A2.99 2.99 0 0 1 4.5 13h8V1.5h-8A1 1 0 0 0 3.5 2.5v10.51Z" />
+                                            </svg>
+                                            <span>spigot-plugins</span>
+                                        </a>
+                                        <span class="visibility">Public</span>
+                                    </div>
+                                    <p class="repo-description">
+                                        Java-Pluginentwicklung mit Maven, Konfigurationssystemen, Commands und
+                                        serverseitigen Erweiterungen.
+                                    </p>
+                                    <div class="repo-footer">
+                                        <span class="repo-lang"><span class="lang-dot orange"></span>Java</span>
+                                        <span class="repo-links"></span>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="stack">
+            <div class="wrap">
+                <div class="section-head">
+                    <div class="section-label">Stack</div>
+                    <h2 class="section-title">Technologien und Schwerpunkte</h2>
+                </div>
+
+                <div class="stack-grid">
+                    <article class="stack-card">
+                        <h3>Frontend</h3>
+                        <p>React Native, Expo, TypeScript, mobile Navigation, Komponentenstrukturen und responsive
+                            Oberflächen.</p>
+                    </article>
+
+                    <article class="stack-card">
+                        <h3>Backend</h3>
+                        <p>Node.js, Express, MySQL, REST APIs, JWT-basierte Authentifizierung, Datenmodelle und
+                            Fehleranalyse.</p>
+                    </article>
+
+                    <article class="stack-card">
+                        <h3>Infrastructure</h3>
+                        <p>Linux-VPS, Docker, Plesk, Domains, SSH, Logging, Datenbanken und selbst betriebene Dienste.
+                        </p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="wrap">
+                <div class="section-head">
+                    <div class="section-label">Timeline</div>
+                    <h2 class="section-title">Werdegang</h2>
+                </div>
+
+                <div class="timeline">
+                    <article class="timeline-item">
+                        <small>Heute</small>
+                        <h3>Berufliches Gymnasium · Profil Informationstechik</h3>
+                        <p>Schwerpunkt Informatik, Mathematik und technische Problemlösung</p>
+                    </article>
+
+                    <article class="timeline-item">
+                        <small>September 2026</small>
+                        <h3>Duales Studium bei SAP</h3>
+                        <p>Softwareentwicklung, Produktverständnis und echte Unternehmenspraxis
+                            verbinden.</p>
+                    </article>
+
+                    <article class="timeline-item">
+                        <small>Award</small>
+                        <h3>Ferry-Porsche-Preis</h3>
+                        <p>Auszeichnung für besondere Leistungen im MINT-Bereich im Rahmen des Abiturs 2026</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="contact">
+            <div class="wrap">
+                <div class="contact-box">
+                    <h2>Kontakt.</h2>
+                    <p>
+                        Für Austausch über Apps, SAP, UI/UX, Backend oder einfach gute Ideen.
+                    </p>
+
+                    <div class="quick-links">
+                        <a class="button primary" href="mailto:postfach@tolutz.de">E-Mail</a>
+                        <a class="button" href="httpp://linkedin.com/in/tobiaslutz7" target="_blank"
+                            rel="noreferrer">LinkedIn</a>
+                        <a class="button" href="https://github.com/to-lutz" target="_blank" rel="noreferrer">GitHub</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="wrap">© 2026 Tobias Lutz</div>
+    </footer>
+</body>
+<script>
+    const repoTabs = document.querySelectorAll(".repo-tab");
+    const repoCards = document.querySelectorAll(".repo-card");
+    const repoCount = document.querySelector(".repo-count");
+
+    repoTabs.forEach((tab) => {
+        tab.addEventListener("click", () => {
+            const filter = tab.dataset.filter;
+            let visibleCount = 0;
+
+            repoTabs.forEach((item) => item.classList.remove("active"));
+            tab.classList.add("active");
+
+            repoCards.forEach((card) => {
+                const categories = card.dataset.category || "";
+                const isVisible = filter === "all" || categories.split(" ").includes(filter);
+
+                card.classList.toggle("is-hidden", !isVisible);
+
+                if (isVisible) {
+                    visibleCount += 1;
+                }
+            });
+
+            if (repoCount) {
+                repoCount.textContent = `${visibleCount} ${visibleCount === 1 ? "Projekt" : "Projekte"}`;
+            }
+        });
+    });
+</script>
+
+</html>
